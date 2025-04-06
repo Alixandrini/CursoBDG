@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sistema Gerenciador de Banco de Dados &#8212; Curso de Análise de dados Geoespacias em BD</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulo_1/SGBD';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Modelo Relacional" href="Modelo_Relacional.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Curso de Análise de dados Geoespacias em BD - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Curso de Análise de dados Geoespacias em BD - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sistema Gerenciador de Banco de Dados</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Modelo_Relacional.html">Modelo Relacional</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Modelo_NoSQL.html">Modelos não Relacionais (NoSQL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_2/PostgreSQL.html">O que é o PostgreSQL ?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_2/PostGIS.html">O que é o PostGIS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_3/Intro_QGIS.html">O que é QGIS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_3/Desenvolvimento_plugins.html">Desenvolvimento de Pluing para QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_4/Analise_espacial_verorial.html">Análise Espacial Vetorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_4/Analise_espacial_raster.html">Análise espacial raster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_4/Analise_espacial_QGIS_Postgree.html">Trabalhando com Banco de dados PostGIS na interface do QGIS</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alixandrini/CursoBDG" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alixandrini/CursoBDG/issues/new?title=Issue%20on%20page%20%2FModulo_1/SGBD.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Modulo_1/SGBD.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sistema Gerenciador de Banco de Dados</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sistema Gerenciador de Banco de Dados</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitetura-dos-gerenciadores-de-bancos-de-dados">Arquitetura dos gerenciadores de bancos de dados</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-banco-de-dados">Modelos de Banco de dados</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sistema-gerenciador-de-banco-de-dados">
+<h1>Sistema Gerenciador de Banco de Dados<a class="headerlink" href="#sistema-gerenciador-de-banco-de-dados" title="Link to this heading">#</a></h1>
+<p>Até  a  década  de  70,  era  comum  que  o  sistema  de  informação  fosse responsável  por  gerenciar  sua  base  de  dados,  ou  seja,  possuir  rotinas  de armazenamento e recuperação. Porém, existem vários desafios para realizar essas rotinas de modo seguro e eficiente. Desenvolver essas rotinas exigiam muito tempo do desenvolvimento que poderia ser direcionado a um problema específico de uma dada empresa. Como armazenar e recuperar dados era uma necessidade comum, logo surgiram  sistemas  específicos  para  essas  tarefas  denominados  de  sistemas gerenciadores de banco  de dados (SGBD). <br>
+Em geral, o sistema gerenciador de banco de dados (SGBD) é um software que controla banco de dados, e, por sua vez, é uma estrutura computacional que compartilha e integra dados. Um sistema de banco de dados é composto de um conjunto de metadados, que armazena informações sobre os elementos por meio dos quais dados do usuário são integrados e gerenciados <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.
+Uma engine (mecanismo) é a parte do sistema gerenciador de banco de dados que realmente armazena e recupera dados. Na maioria das vezes, o sistema possui uma interface de programação (API) que permite o controle direto do motor, sem a interação com a interface do
+usuário do SGBD. <br>
+Um sistema gerenciador de banco de dados como uma coleção de programas que permite aos usuários criar e manter um banco  de  dados.  Ele  facilita  o  processo  de  definição,  construção,  manipulação  e compartilhamento de bancos de dados entre diversos usuários e aplicações. Outras funções e vantagens de usar um sistema gerenciador de banco de dados incluem:</p>
+<ul class="simple">
+<li><p>Restringir  acesso  não  autorizado,  como  são  usados  em  ambiente multiusuário, o SGBD funciona geralmente como servidor e permite criar diferentes níveis de usuário e acesso. <br></p></li>
+<li><p>Tornar  as  consultas  mais  eficientes,  pois  por  serem  especialistas  esses sistemas  tendem  a  possuir  todo  um  conhecimento  acumulado  através  de algoritmos eficientes para armazenar e consultar dados.</p></li>
+<li><p>Backup  e  recuperação,  os  sistemas  normalmente  possuem  utilitários  que ajudam no processo de criar e recuperar backup.</p></li>
+<li><p>Controlar a redundância, pois permitem relacionar os dados de modo a evitar esse problema.</p></li>
+<li><p>Representar  relacionamentos  complexos  inclui  diversos  tipos  de relacionamentos.</p></li>
+<li><p>Impor  restrições  de  integridade,  após  definido  um  esquema  com  os relacionamentos,  pois  esses  sistemas  têm  mecanismos  que  garantem  a integridade dos dados.</p></li>
+</ul>
+  <img src="https://www.researchgate.net/publication/228807782/figure/fig1/AS:669572243918873@1536649871467/Figura-1-Sistema-simplificado-de-banco-de-dados.png">
+<p>Alguns  gerenciadores  de  banco  de  dados  dão  suporte  à  manipulação  de dados espaciais, sendo referidos como banco de dados espaciais (ou geográficos). Dessa forma, um banco de dados espacial é um sistema que oferece tipos de dados espaciais,  uma  linguagem  de  consulta  que  suporta  operações  espaciais  e  fornece métodos de indexação espacial.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>
+<br>
+O banco de dados geográficos é um importante componente  dos sistemas de informação geográfica, são os sistemas que realizam o tratamento computacional de  dados  geográficos,  sendo  um  sistema  imprescindível  para  as  atividades  de geoprocessamento. O banco de dados geográfico ou espacial é destacado como o componente base para a arquitetura de um sistema de informação geográfica.
+<br></p>
+<blockquote>
+<div><p>ATENÇÃO! <br>
+Vale destacar que uma pasta organizada com seus arquivos shapefiles não define um banco de dados geográficos.</p>
+</div></blockquote>
+<section class="footnotes" role="doc-endnotes">
+  <hr>
+  <ol>
+  <li id="fn:1" role="doc-endnote">
+      <p>ROB, P.; CORONEL, C.  Sistema de banco de dados: projeto, implementação e gerenciamento. São Paulo: Cengage Learning, 2011. cap.1, p. 6-10.<a href="#fnref:1" class="footnote-backref" role="doc-backlink">↩︎</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+    <p> GÜTING,  RALF  HARTMUT.  An  introduction  to  spatial  database  systems.  The VLDB Journal—The International Journal on Very Large Data Bases, v. 3, n. 4, p. 357-399, 1994. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">↩︎</a></p>
+    </li>
+  </ol>
+</section></section>
+<section class="tex2jax_ignore mathjax_ignore" id="arquitetura-dos-gerenciadores-de-bancos-de-dados">
+<h1>Arquitetura dos gerenciadores de bancos de dados<a class="headerlink" href="#arquitetura-dos-gerenciadores-de-bancos-de-dados" title="Link to this heading">#</a></h1>
+<p>Os  gerenciadores  de  banco  de  dados,  como  outros  sistemas,  foram implementados inicialmente através de uma arquitetura centralizada, onde todo  o
+processamento  ocorria  em  grandes  computadores  denominados  de  Mainframes. Nela, os usuários tinham acesso a esses sistemas através de terminais burros, que
+eram apenas dispositivos de entrada e saída de dados equipados como monitores e teclados conectados ao computador central.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Arquitetura SGBD Centralizada.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><img src=https://slideplayer.com.br/slide/3646252/12/images/23/Arquitetura+SGBD+Centralizada.jpg></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Com  a  redução  dos  preços,  os  terminais  foram  substituídos  por computadores que agora eram capazes de realizar parte do processamento.  Desse modo, foi possível migrar para a arquitetura cliente/servidor. Essa é a arquitetura utilizada pelos atuais sistemas gerenciadores de banco de dados como o PostgreSQL. <br>
+Essa arquitetura não é exclusiva para gerenciadores de banco de dados, mas é usada em diversos outros sistemas que usamos atualmente,
+como a web, correio eletrônico, impressoras, sincronização de arquivos entre outros. Quando digitamos um endereço em um navegador, que é uma aplicação cliente, é enviado uma requisição a um recurso em um computador servidor que está localizado naquele endereço.  O mesmo ocorre com os gerenciadores de banco de dados. <br>
+Note que nessa arquitetura não é obrigatório que o cliente e o servidor
+estejam  em  computadores  distintos.  Veremos exemplificações onde serão apresentados alguns tutoriais onde o cliente e servidor são instalados no mesmo computador. Em ambientes institucionais e corporativos é mais comum que exista um computador que irá  centralizar  os  dados  para  serem  acessados  por  diversos  usuários. <br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Arquitetura Cliente/Servidor em 2 camadas.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><img src=https://www.researchgate.net/publication/358040043/figure/fig1/AS:1115157958787072@1642885784073/Figura-4-Arquitetura-cliente-servidor-fisica-em-duas-camadas.ppm></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="modelos-de-banco-de-dados">
+<h1>Modelos de Banco de dados<a class="headerlink" href="#modelos-de-banco-de-dados" title="Link to this heading">#</a></h1>
+<p>Além de classificar os gerenciadores de banco de dados pela arquitetura, é  comum  usar  como  base  a  forma  que  eles  organizam  a  informação.  Os  primeiros  SGBDs organizavam os dados geralmente em forma de árvores (modelo hierárquico) ou estruturas de rede (arestas e vértices). Atualmente, o modelo mais utilizado é o relacional  (SGBR-R),  que  surgiu  com  base  na  álgebra  relacional  proposta  pelo pesquisador da IBM Ted Codd, onde ele propôs conceitos como relações, tuplas e atributos. Nesse modelo, um banco é representado como uma coleção de tabelas, denominadas também de relações.
+<br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Estrutura de uma relação.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><img src=https://slideplayer.com.br/slide/17440012/102/images/4/Exemplo+de+tabela%3A+instructor.jpg></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Com a popularização das linguagens orientadas a objetos, esperava-se que os gerenciadores de banco de dados suportassem os conceitos desse paradigma, como herança, composição e agregação.  Elmasri e Ramez<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> definem os bancos de dados orientados a objetos como aquele que lida com objetos, suas propriedades e operações. Os objetos com a mesma estrutura e comportamento pertencem a uma classe, e as classes são organizadas em hierarquias. As operações de cada classe são especificadas  com  procedimentos  pré  definidos,  chamados  métodos.  <br></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Exemplo diagrama de classe.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><img alt="Exemplo diagrama de classe" src="https://www.devmedia.com.br/Imagens/gold/SQL/42/artigo2/image004.jpg" /></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Os  sistemas  de  banco  de  dados  orientados  a  objetos  não  se  tornaram populares, porém eles influenciaram os sistemas conhecidos como objeto-relacional (SGBR-OR) ou relacional estendido.  Essa nova família de sistemas permite a criação de tipos de dados complexos, que vão além dos tipos convencionais como texto, número e datas, mantendo a compatibilidade do modelo relacional e, sendo assim, muito mais fácil a migração. Um exemplo de sistema gerenciador de banco de dados objeto-relacional é o PostgreSQL.  <br>
+Os bancos de dados relacionais e os objeto-relacionais são predominantes, mas atualmente têm surgido  algumas alternativas a esse modelo  que  estão sendo agrupados com a denominação de banco de dados não relacional, ou NoSQL. Esses sistemas  agrupam  as  informações  baseados  em  documentos,  grafos,  chave  valor, triplas entre outros modelos. Inclusive, alguns deles possuem algum suporte para armazenamento  e  consulta  de  dados  espaciais.  Um  exemplo  é  o  mongoDB   que permite armazenar dados no formato GeoJSON, como no fragmento a seguir:</p>
+<pre>
+  <code>
+    <GeoJSON>
+{
+  type: "MultiPolygon",
+  coordinates: [
+     [ [ [ -73.958, 40.8003 ], [ -73.9498, 40.7968 ], [ -73.9737, 40.7648 ], [ -73.9814, 40.7681 ], [ -73.958, 40.8003 ] ] ],
+     [ [ [ -73.958, 40.8003 ], [ -73.9498, 40.7968 ], [ -73.9737, 40.7648 ], [ -73.958, 40.8003 ] ] ]
+  ]
+}
+    </GeoJSON>
+  </code>
+</pre>
+<section class="footnotes" role="doc-endnotes">
+  <hr>
+  <ol>
+  <li id="fn:1" role="doc-endnote">
+      <p>ELMASRI, RAMEZ; NAVATHE, SHAMKANT B. Sistemas de Banco de Dados. 4. ed. São Paulo, Pearson Addison Wesley, 2005. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">↩︎</a></p>
+    </li>
+  </ol>
+</section></section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulo_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Modelo_Relacional.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Modelo Relacional</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sistema Gerenciador de Banco de Dados</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitetura-dos-gerenciadores-de-bancos-de-dados">Arquitetura dos gerenciadores de bancos de dados</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-banco-de-dados">Modelos de Banco de dados</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By LabFSR/UFBA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelos não Relacionais (NoSQL) &#8212; Curso de Análise de dados Geoespacias em BD</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulo_1/Modelo_NoSQL';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="O que é o PostgreSQL ?" href="../Modulo_2/PostgreSQL.html" />
+    <link rel="prev" title="Modelo Relacional" href="Modelo_Relacional.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Curso de Análise de dados Geoespacias em BD - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Curso de Análise de dados Geoespacias em BD - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="SGBD.html">Sistema Gerenciador de Banco de Dados</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Modelo_Relacional.html">Modelo Relacional</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelos não Relacionais (NoSQL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_2/PostgreSQL.html">O que é o PostgreSQL ?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_2/PostGIS.html">O que é o PostGIS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_3/Intro_QGIS.html">O que é QGIS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_3/Desenvolvimento_plugins.html">Desenvolvimento de Pluing para QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_4/Analise_espacial_verorial.html">Análise Espacial Vetorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_4/Analise_espacial_raster.html">Análise espacial raster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modulo_4/Analise_espacial_QGIS_Postgree.html">Trabalhando com Banco de dados PostGIS na interface do QGIS</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alixandrini/CursoBDG" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alixandrini/CursoBDG/issues/new?title=Issue%20on%20page%20%2FModulo_1/Modelo_NoSQL.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Modulo_1/Modelo_NoSQL.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelos não Relacionais (NoSQL)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-nao-relacionais-nosql">
+<h1>Modelos não Relacionais (NoSQL)<a class="headerlink" href="#modelos-nao-relacionais-nosql" title="Link to this heading">#</a></h1>
+<p>Um banco de dados não relacional, frequentemente referido como NoSQL (Not Only SQL), é um tipo de banco de dados que não usa o modelo relacional tradicional de tabelas com linhas e colunas. Em vez disso, ele utiliza modelos de armazenamento otimizados para diferentes tipos de dados e necessidades de aplicações.
+Aqui estão algumas características e pontos-chave sobre bancos de dados não relacionais:</p>
+<ul class="simple">
+<li><p>Flexibilidade de Esquema:
+Ao contrário dos bancos de dados relacionais, que exigem um esquema rígido predefinido, os bancos de dados NoSQL geralmente permitem esquemas dinâmicos ou flexíveis. Isso significa que você pode armazenar dados com estruturas variáveis, o que é útil para dados semiestruturados ou não estruturados.</p></li>
+<li><p>Escalabilidade Horizontal:
+Os bancos de dados NoSQL são projetados para escalar horizontalmente, o que significa que podem lidar com grandes volumes de dados distribuindo-os em vários servidores. Isso os torna adequados para aplicações com alta demanda de dados e tráfego.</p></li>
+<li><p>Variedade de Modelos de Dados:
+Existem diferentes tipos de bancos de dados NoSQL, cada um com seu próprio modelo de dados:
+Chave-valor: Armazenam dados como pares de chave e valor (ex: Redis).
+Documento: Armazenam dados em documentos como JSON ou XML (ex: MongoDB).
+Coluna larga: Armazenam dados em colunas, ideal para grandes conjuntos de dados (ex: Cassandra).
+Grafo: Armazenam dados em grafos, para representar relacionamentos complexos (ex: Neo4j).</p></li>
+<li><p>Desempenho:
+Muitos bancos de dados NoSQL são otimizados para alto desempenho, especialmente em operações de leitura e gravação em grande escala.</p></li>
+</ul>
+<blockquote>
+<div><p>ATENÇÃO: <br>
+Quando usaremos os modelos NoSQL?</p>
+<ul class="simple">
+<li><p>Aplicações com grandes volumes de dados não estruturados ou semiestruturados.</p></li>
+<li><p>Aplicações que exigem alta escalabilidade e desempenho.</p></li>
+<li><p>Aplicações que precisam de flexibilidade no esquema de dados.</p></li>
+<li><p>Aplicações que priorizam velocidade e agilidade no desenvolvimento.</p></li>
+</ul>
+</div></blockquote>
+<p>Os principais tipos de bancos de dados NoSQL são:</p>
+<ul class="simple">
+<li><p>Bancos de dados de chave-valor:
+Armazenam dados como pares de chave-valor, onde cada chave é única e identifica um valor associado.
+São ideais para armazenar dados simples e para aplicações que exigem alta velocidade de leitura e gravação.
+Exemplos: Redis, Amazon DynamoDB.</p></li>
+<li><p>Bancos de dados de documentos:
+Armazenam dados em documentos, geralmente no formato JSON, XML ou BSON.
+São flexíveis e permitem armazenar dados com estruturas variadas.
+São adequados para aplicações que lidam com dados semiestruturados, como sistemas de gerenciamento de conteúdo.
+Exemplos: MongoDB, CouchDB.</p></li>
+<li><p>Bancos de dados de colunas largas:
+Armazenam dados em colunas, em vez de linhas como nos bancos de dados relacionais.
+São altamente escaláveis e eficientes para consultas que envolvem grandes volumes de dados.
+São utilizados em aplicações que precisam processar grandes quantidades de dados, como sistemas de análise de dados.
+Exemplos: Apache Cassandra, HBase.</p></li>
+<li><p>Bancos de dados de grafos:
+Armazenam dados em grafos, onde os dados são representados por nós e as relações entre os dados são representadas por arestas.
+São ideais para aplicações que precisam analisar relacionamentos complexos entre os dados, como redes sociais e sistemas de recomendação.
+Exemplos: Neo4j.</p></li>
+</ul>
+<p>A área de NoSQL espacial está em constante evolução e oferece alternativas interessantes para o armazenamento e análise de dados geoespaciais. Aqui estão algumas experiências e tecnologias relevantes para você pesquisar:</p>
+<ol class="arabic simple">
+<li><p>MongoDB com GeoJSON:
+Descrição:
+O MongoDB é um banco de dados de documentos NoSQL que oferece suporte nativo a dados geoespaciais através do formato GeoJSON.
+Ele permite armazenar e consultar dados geográficos, como pontos, linhas e polígonos, usando índices geoespaciais.
+É uma boa opção para aplicações que lidam com grandes volumes de dados geoespaciais não estruturados, como dados de localização de dispositivos móveis ou dados de sensores.
+Aplicações:
+Rastreamento de veículos e ativos.
+Análise de dados de localização de usuários em aplicativos móveis.
+Armazenamento de dados de sensores geoespaciais.</p></li>
+<li><p>Elasticsearch com Geo Queries:
+Descrição:
+O Elasticsearch é um mecanismo de busca e análise distribuído que também oferece suporte a dados geoespaciais.
+Ele permite indexar dados geoespaciais e realizar consultas de proximidade, buscas por bounding box e outras operações geoespaciais.
+É ideal para aplicações que precisam de buscas rápidas e flexíveis em grandes conjuntos de dados geoespaciais.
+Aplicações:
+Busca de pontos de interesse próximos a uma localização.
+Análise de dados de geolocalização em tempo real.
+Visualização de dados geoespaciais em mapas interativos.</p></li>
+<li><p>Apache Cassandra com GeoMesa:
+Descrição:
+O Apache Cassandra é um banco de dados NoSQL de coluna larga, altamente escalável e disponível.
+O GeoMesa é uma biblioteca que adiciona suporte a dados geoespaciais ao Cassandra, permitindo armazenar e consultar dados geoespaciais em grande escala.
+É adequado para aplicações que exigem alta disponibilidade e escalabilidade, como sistemas de monitoramento em tempo real.
+Aplicações:
+Monitoramento de tráfego em tempo real.
+Análise de dados de redes de sensores distribuídas.
+Armazenamento de grandes volumes de dados de localização de dispositivos IoT.
+Pontos importantes a considerar:</p></li>
+</ol>
+<p>Ao explorar NoSQL espacial, é importante entender as diferenças entre os modelos de dados NoSQL e como eles se aplicam aos dados geoespaciais.
+Cada tecnologia tem seus pontos fortes e fracos, e a escolha da melhor opção dependerá dos requisitos específicos da sua aplicação.
+A integração com ferramentas de visualização e análise geoespacial, como QGIS ou ferramentas de visualização baseadas na web, é um aspecto crucial a ser considerado.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulo_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Modelo_Relacional.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modelo Relacional</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Modulo_2/PostgreSQL.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">O que é o PostgreSQL ?</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By LabFSR/UFBA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
