@@ -1,2 +1,2 @@
 # CursoBDG
-Curso de análise espacial com banco de dados geoespacial
+Apostila do Curso de análise espacial com banco de dados geoespacial (ainda em construção ...)
